@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 ShopGo. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Length" type="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute">
+        <arguments>
+            <argument name="attributeName" xsi:type="string">length</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Width" type="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute">
+        <arguments>
+            <argument name="attributeName" xsi:type="string">width</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Height" type="ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute">
+        <arguments>
+            <argument name="attributeName" xsi:type="string">height</argument>
+        </arguments>
+    </virtualType>
+</config>

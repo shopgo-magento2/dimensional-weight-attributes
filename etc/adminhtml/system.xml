@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 ShopGo. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="dimensional_weight_attributes" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>Dimensional Weight Attributes</label>
+            <tab>shopgo</tab>
+            <resource>ShopGo_DimensionalWeightAttributes::config_dimensional_weight_attributes</resource>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="length" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Length</label>
+                    <source_model>ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Length</source_model>
+                </field>
+                <field id="width" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Width</label>
+                    <source_model>ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Width</source_model>
+                </field>
+                <field id="height" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Height</label>
+                    <source_model>ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\DimensionalWeightAttribute\Height</source_model>
+                </field>
+                <field id="separator" translate="label" type="hidden" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0"/>
+                <field id="attribute_set" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Attribute Set</label>
+                    <source_model>ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\Attribute\Set</source_model>
+                </field>
+                <field id="attribute_group" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Attribute Group</label>
+                    <comment><![CDATA[<strong style="color:#3D5B9C">Note:&nbsp;</strong>Attribute set and group are optional and only used to set dimensional weight attributes.]]></comment>
+                    <source_model>ShopGo\DimensionalWeightAttributes\Model\System\Config\Source\Attribute\Group</source_model>
+                </field>
+                <field id="set_attribute_button" translate="label" type="button" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <button_label>Set Attributes</button_label>
+                    <frontend_model>ShopGo\DimensionalWeightAttributes\Block\Adminhtml\System\Config\DimensionalWeightAttributes\SetAttributes</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

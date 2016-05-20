@@ -1,0 +1,129 @@
+<?php
+/**
+ * Copyright © 2016 ShopGo. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * @see \ShopGo\DimensionalWeightAttributes\Block\Adminhtml\System\Config\DimensionalWeightAttributes\SetAttributes
+ */
+?>
+<script>
+require([
+    'jquery',
+    'Magento_Ui/js/modal/alert'
+], function(jQuery, alert) {
+
+//<![CDATA[
+    var configFieldIdPrefix = '#dimensional_weight_attributes_general_';
+    var defaultMessage = '<?php echo __(
+        'The triggered action status is unknown! '
+        . 'If the issue persists, please contact the module author'
+    ) ?>';
+
+    function setDimensionalWeightAttributes() {
+        var params = {
+            attribute_set: jQuery(configFieldIdPrefix + 'attribute_set').val(),
+            attribute_group: jQuery(configFieldIdPrefix + 'attribute_group option:selected').val(),
+            form_key: FORM_KEY
+        };
+
+        jQuery.ajax({
+            url: '<?php /* @escapeNotVerified */ echo $block->getAjaxUrl() ?>',
+            method: 'POST',
+            data: params,
+            dataType: 'json',
+            showLoader: true,
+            success: function(response) {
+                var result = defaultMessage;
+
+                try {
+                    if (response.status) {
+                        result = response.description;
+
+                        alert({
+                            content: result,
+                            actions: {
+                                always: function () {
+                                    location.reload();
+                                }
+                            }
+                        });
+
+                        return true;
+                    } else if (response.status === 0) {
+                        result = response.description;
+                    }
+                } catch (e) {}
+
+                alert({
+                    content: result
+                });
+            },
+            error: function(response) {
+                alert({
+                    content: defaultMessage
+                });
+            }
+        });
+    }
+
+    function getAttributeGroups() {
+        var params = {
+            attribute_set: jQuery(configFieldIdPrefix + 'attribute_set').val(),
+            form_key: FORM_KEY
+        };
+
+        jQuery.ajax({
+            url: '<?php /* @escapeNotVerified */ echo $block->getAttributeGroupsGetterAjaxUrl() ?>',
+            method: 'POST',
+            data: params,
+            dataType: 'json',
+            showLoader: true,
+            success: function(response) {
+                var result = defaultMessage;
+
+                try {
+                    if (response.status && response.data) {
+                        result = response.description;
+                        var attributeGroupField = jQuery(configFieldIdPrefix + 'attribute_group');
+                        attributeGroupField.empty();
+                        jQuery.each(response.data, function(i, data) {
+                            var option = document.createElement('option');
+                            attributeGroupField.append(
+                                jQuery(option).attr('value', data.value).text(data.label)
+                            );
+                        });
+                    }
+                } catch (e) {}
+
+                alert({
+                    content: result
+                });
+            },
+            error: function(response) {
+                alert({
+                    content: defaultMessage
+                });
+            }
+        });
+    }
+
+    jQuery(configFieldIdPrefix + 'attribute_set').on('change', function(e) {
+        getAttributeGroups();
+    });
+
+    window.setDimensionalWeightAttributes = setDimensionalWeightAttributes;
+//]]>
+
+});
+</script>
+<div class="actions actions-set-dimensional-weight-attributes">
+    <button onclick="javascript:setDimensionalWeightAttributes(); return false;" class="action-set-dimensional-weight-attributes" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>
