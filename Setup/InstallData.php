@@ -25,11 +25,21 @@ class InstallData implements InstallDataInterface
     private $eavSetupFactory;
 
     /**
+     * Dimensional weight attributes model
+     *
+     * @var \ShopGo\DimensionalWeightAttributes\Model\DimensionalWeightAttributes
+     */
+    private $dimensionalWeightAttributes;
+
+    /**
      * @param EavSetupFactory $eavSetupFactory
      */
-    public function __construct(EavSetupFactory $eavSetupFactory)
-    {
+    public function __construct(
+        EavSetupFactory $eavSetupFactory,
+        \ShopGo\DimensionalWeightAttributes\Model\DimensionalWeightAttributes $dimensionalWeightAttributes
+    ) {
         $this->eavSetupFactory = $eavSetupFactory;
+        $this->dimensionalWeightAttributes = $dimensionalWeightAttributes;
     }
 
     /**
